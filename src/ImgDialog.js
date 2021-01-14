@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 import Slide from '@material-ui/core/Slide'
+import { Button } from '@material-ui/core'
 
 const styles = {
   appBar: {
@@ -26,6 +27,9 @@ const styles = {
   img: {
     maxWidth: '100%',
     maxHeight: '100%',
+  },
+  btn: {
+    color: '#ffffff',
   },
 }
 
@@ -63,14 +67,31 @@ class ImgDialog extends React.Component {
               aria-label="Close"
             >
               <CloseIcon />
+              
             </IconButton>
             <Typography
               variant="title"
               color="inherit"
               className={classes.flex}
             >
-              Cropped image
+              Do you want to send this image?
             </Typography>
+            <Button onClick={async () => {
+                const imgSrc = {imageSrc: this.props.img};
+                const response = await fetch("/get_image", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(imgSrc)
+                });
+                if (response.ok) {
+                  console.log("response worked!");
+                }
+              }}
+              className={classes.btn}>
+              ok
+            </Button>
           </Toolbar>
         </AppBar>
         <div className={classes.imgContainer}>

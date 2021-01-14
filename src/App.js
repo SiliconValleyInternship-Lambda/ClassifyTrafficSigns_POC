@@ -119,8 +119,25 @@ const App = ({ classes }) => {
               color="primary"
               classes={{ root: classes.cropButton }}
             >
-              Show Result
+              SUBMIT
             </Button>
+            {/* <Button
+              onClick={async () => {
+                const signImage = imageurl;
+                const response = await fetch("/get_image", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(signImage)
+                });
+                if (response.ok) {
+                  console.log("response worked!");
+                }
+              }}
+            >
+              submit
+            </Button> */}
           </div>
           <ImgDialog img={croppedImage} onClose={onClose} />
         </React.Fragment>
